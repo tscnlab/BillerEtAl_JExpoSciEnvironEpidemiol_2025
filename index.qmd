@@ -2536,6 +2536,7 @@ interpretation <-
     "The more often the lights are turned on immediately after waking up, the earlier the first time above 250 lx"
     )
 
+table <- 
 corr_results %>% filter(significant_adjusted) %>% 
   select(-c(p_value, significant, significant_adjusted, factor, coloring)) %>% 
   mutate(across(starts_with("p_value"), style_pvalue),
@@ -2567,8 +2568,10 @@ corr_results %>% filter(significant_adjusted) %>%
   ) %>% 
   cols_add(Interpretation = interpretation) %>% 
   fmt(columns = leba, fns = \(x) x %>% str_remove("leba_") %>% 
-        str_replace("_", ", ")) %>% 
-  gtsave("figures/Table_2.png", vwidth = 1100)
+        str_replace("_", ", "))
+
+  gtsave(table, "figures/Table_2.png", vwidth = 1100)
+  gtsave(table, "figures/Table_2.docx")
 
 ```
 
@@ -4388,6 +4391,9 @@ compliance_table
 
 compliance_table |>
 gtsave("figures/Table_1.png")
+
+compliance_table |>
+gtsave("figures/Table_1.docx")
 
 ```
 
